@@ -154,3 +154,139 @@ app.io.route('swin', function (req) {
 //        }
     }); // for the pg.connect
 }); // for the app.io.rout
+
+app.io.route('lwin', function (req) {
+
+    pg.connect('postgres://ws7:ws7@localhost/seven', function(err, client,done) {
+        if (err) {
+            return console.error('error fetching client from pool', err);
+            }
+            client.query('SELECT DISTINCT ON (tmstamp) tmstamp, prlrin, prilrout, vanlrin, vanlrout from solar ORDER BY tmstamp ASC', function(err, result) {
+                done();
+                if (err) {
+                    return console.error('error blerg', err);
+                }
+                console.log(result.rows.length);
+                var TmStamp = [];
+                var PRIMET_LW_IN = [];
+                var PRIMET_LW_OUT= [];
+                var VANMET_LW_IN = [];
+                var VANMET_LW_OUT = [];
+                for (var i = 0; i < result.rows.length; ++i) {
+                        TmStamp.push(result.rows[i].tmstamp.getTime());
+                        PRIMET_LW_IN.push(Math.round(result.rows[i].prlrin*100)/100);
+                        PRIMET_LW_OUT.push(Math.round(result.rows[i].prilrout*100)/100);
+                        VANMET_LW_IN.push(Math.round(result.rows[i].vanlrin*100)/100);
+                        VANMET_LW_OUT.push(Math.round(result.rows[i].vanlrout*100)/100);
+                }
+                req.io.emit('plot-data', {
+                        TmStamp: TmStamp,
+                        PRIMET_LW_IN: PRIMET_LW_IN,
+                        PRIMET_LW_OUT: PRIMET_LW_OUT,
+                        VANMET_LW_IN: VANMET_LW_IN,
+                        VANMET_LW_OUT: VANMET_LW_OUT,
+                });
+//               }
+            }); // for the client.query
+//        }
+    }); // for the pg.connect
+}); // for the app.io.rout
+
+app.io.route('net', function (req) {
+
+    pg.connect('postgres://ws7:ws7@localhost/seven', function(err, client,done) {
+        if (err) {
+            return console.error('error fetching client from pool', err);
+            }
+            client.query('SELECT DISTINCT ON (tmstamp) tmstamp, prlrin, prilrout, prisrin, prisrout, vanlrin, vanlrout, vansrin, vansrout from solar ORDER BY tmstamp ASC', function(err, result) {
+                done();
+                if (err) {
+                    return console.error('error blerg', err);
+                }
+                console.log(result.rows.length);
+                var TmStamp = [];
+                var PRIMET_NET = [];
+                var VANMET_NET= [];
+                for (var i = 0; i < result.rows.length; ++i) {
+                        TmStamp.push(result.rows[i].tmstamp.getTime());
+                        PRIMET_NET.push(-1*Math.round(result.rows[i].prilrout*100)/100 - Math.round(result.rows[i].prisrout*100)/100 + Math.round(result.rows[i].prlrin*100)/100 +Math.round(result.rows[i].prisrin*100)/100);
+                        VANMET_NET.push(-1*Math.round(result.rows[i].vanlrout*100)/100 - Math.round(result.rows[i].vansrout*100)/100 + Math.round(result.rows[i].vanlrin*100)/100 + Math.round(result.rows[i].vansrin*100)/100);
+                }
+                req.io.emit('plot-data', {
+                        TmStamp: TmStamp,
+                        PRIMET_NET: PRIMET_NET,
+                        VANMET_NET: VANMET_NET,
+                });
+//               }
+            }); // for the client.query
+//        }
+    }); // for the pg.connect
+}); // for the app.io.rout
+
+app.io.route('seven', function (req) {
+
+    pg.connect('postgres://ws7:ws7@localhost/seven', function(err, client,done) {
+        if (err) {
+            return console.error('error fetching client from pool', err);
+            }
+            client.query('SELECT DISTINCT ON (tmstamp) tmstamp, incoming, outgoing from sevenrad ORDER BY tmstamp ASC', function(err, result) {
+                done();
+                if (err) {
+                    return console.error('error blerg', err);
+                }
+                console.log(result.rows.length);
+                var TmStamp = [];
+                var WS7_INCOMING = [];
+                var WS7_OUTGOING= [];
+                var WS7_NET = [];
+                for (var i = 0; i < result.rows.length; ++i) {
+                        TmStamp.push(result.rows[i].tmstamp.getTime());
+                        WS7_INCOMING.push(Math.round(result.rows[i].incoming*100)/100);
+                        WS7_OUTGOING.push(Math.round(result.rows[i].outgoing*100)/100)
+                        WS7_NET.push(Math.round(result.rows[i].incoming*100)/100 - Math.round(result.rows[i].outgoing*100)/100);
+                }
+                req.io.emit('plot-data', {
+                        TmStamp: TmStamp,
+                        WS7_INCOMING: WS7_INCOMING,
+                        WS7_OUTGOING: WS7_OUTGOING,
+                        WS7_NET: WS7_NET,
+                });
+//               }
+            }); // for the client.query
+//        }
+    }); // for the pg.connect
+}); // for the app.io.rout
+
+app.io.route('cross', function (req) {
+
+    pg.connect('postgres://ws7:ws7@localhost/seven', function(err, client,done) {
+        if (err) {
+            return console.error('error fetching client from pool', err);
+            }
+            client.query("SELECT DISTINCT ON (solar.tmstamp) solar.tmstamp, solar.prisrin, solar.prisrout, solar.prlrin, solar.prilrout, solar.vansrin, solar.vansrout, solar.vanlrin, solar.vanlrout, sevenrad.incoming, sevenrad.outgoing from solar, sevenrad where date_part('month', solar.tmstamp) = date_part('month', sevenrad.tmstamp) and date_part('day', solar.tmstamp) = date_part('day', sevenrad.tmstamp) and date_part('hour', solar.tmstamp) = date_part('hour', sevenrad.tmstamp) and date_part('minute', solar.tmstamp) = date_part('minute', sevenrad.tmstamp) ORDER BY solar.tmstamp ASC", function(err, result) {
+                done();
+                if (err) {
+                    return console.error('error blerg', err);
+                }
+                console.log(result.rows.length);
+                var TmStamp = [];
+                var PRIMET = [];
+                var VANMET= [];
+                var WS7 = [];
+                for (var i = 0; i < result.rows.length; ++i) {
+                        TmStamp.push(result.rows[i].tmstamp.getTime());
+                        PRIMET.push(-1*Math.round(result.rows[i].prilrout*100)/100 - Math.round(result.rows[i].prisrout*100)/100 + Math.round(result.rows[i].prlrin*100)/100 +Math.round(result.rows[i].prisrin*100)/100);
+                        VANMET.push(-1*Math.round(result.rows[i].vanlrout*100)/100 - Math.round(result.rows[i].vansrout*100)/100 + Math.round(result.rows[i].vanlrin*100)/100 + Math.round(result.rows[i].vansrin*100)/100);
+                        WS7.push(Math.round(result.rows[i].incoming*100)/100 - Math.round(result.rows[i].outgoing*100)/100);
+                }
+                req.io.emit('plot-data', {
+                        TmStamp: TmStamp,
+                        PRIMET: PRIMET,
+                        VANMET: VANMET,
+                        WS7: WS7,
+                });
+//               }
+            }); // for the client.query
+//        }
+    }); // for the pg.connect
+}); // for the app.io.rout

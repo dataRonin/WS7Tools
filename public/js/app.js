@@ -259,19 +259,24 @@
             socket.emit('swin');
         });
 
-        $("#pick-gill").click(function (event) {
+        $("#pick-lw").click(function (event) {
             event.preventDefault();
-            socket.emit('temps');
+            socket.emit('lwin');
         });
 
-        $("#pick-sheltered").click(function (event) {
+        $("#pick-net").click(function (event) {
             event.preventDefault();
-            socket.emit('temps');
+            socket.emit('net');
         });
 
-        $("#pick-").click(function (event) {
+        $("#pick-seven").click(function (event) {
             event.preventDefault();
-            socket.emit('temps');
+            socket.emit('seven');
+        });
+
+        $("#pick-cross").click(function (event) {
+            event.preventDefault();
+            socket.emit('cross');
         });
     }
 
