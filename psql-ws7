@@ -1,0 +1,1 @@
+psql -Uws7 -hlocalhost -dseven

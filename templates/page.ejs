@@ -1,0 +1,110 @@
+<!doctype html>
+<!--[if IE 9]><html class="lt-ie10" lang="en" > <![endif]-->
+<html lang="en" data-useragent="Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; Trident/6.0)">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WS7</title>
+    <link rel="stylesheet" type="text/css" href="/css/foundation.css" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato|Sunshiney|Poiret+One|Open+Sans|Indie+Flower|Vollkorn" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script src="/js/vendor/jquery.js"></script>
+    <script src="/js/vendor/jquery-migrate.min.js"></script>
+    <style type="text/css">
+    ${demo.css}
+    </style>
+    <script src="/js/vendor/modernizr.js"></script>
+    <script src="/js/highstock/highstock.js"></script>
+    <script src="/js/highstock/modules/exporting.js"></script>
+    <script type="text/javascript" src="/js/highstock/themes/dark-blue.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Vollkorn' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="/"><div class="title">WS7 Comparison Toolkit</div></a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon">
+          <a href="#"><span>Menu</span></a>
+        </li>
+      </ul>
+      <section class="top-bar-section">
+        <ul class="left"><li class="divider"></li></ul>
+        <ul class="right"><li class="divider"></li></ul>
+        <!--This constructs menu buttons coming in from the left, if you want one...
+        <ul class="left">
+          <li class="divider"></li>
+          <li><a href="#">Temperature</a></li>
+          <li class="divider"></li>
+          <li><a href="#">Radiation</a></li>
+        </ul>-->
+        <!--This constructs menu buttons coming in from the right-->
+        <ul class="right">
+          <li class="divider"></li>
+          <li><a href="#" id="pick-wind">Wind</a></li>
+          <li class="divider"></li>
+          <li><a href="#" id="pick-temps">Temperature</a></li>
+          <li class="divider"></li>
+          <li class="has-dropdown">
+            <a href="#" id="pick-rads">Net Radiation</a>
+            <ul class="dropdown">
+              <li><a href="#" id="pick-sw">Short Wave, PRI/VAN</a></li>
+              <li><a href="#" id="pick-lw">Long Wave, PRI/VAN</a></li>
+              <li><a href="#" id="pick-primet">PRIMET</a></li>
+              <li><a href="#" id="pick-vanmet">VANMET</a></li>
+              <li><a href="#" id="pick-WS7">WS7</a></li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+    </nav>
+    <div class="vertical-spacer-10"></div>
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="row">
+          <h1 class="indieflower centered">WS7 Comparisons</h1>
+        </div>
+    <div class = "row">
+          <div id="container" style="height: 400px; min-width: 310px"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="row">
+      <div class="large-12 columns">
+        <hr/>
+        <div class="row">
+          <div class="large-6 columns">
+            <p>&copy; Copyright 2015, <a href="mailto:fox@tinybike.net">Fox Peterson</a></p>
+          </div>
+          <!--<div class="large-6 columns">
+            
+            
+            <ul class="inline-list right">
+              <li><a href="mailto:fox@tinybike.net">Contact</a></li>
+            </ul>
+          </div>-->
+        </div>
+      </div>
+    </footer>
+    </footer>
+    <!--<div id="modal-dynamic" class="reveal-modal small" data-reveal>
+      <h3 id="modal-header"></h3>
+      <div id="modal-body"></div>
+      <a class="close-reveal-modal">&#215;</a>
+    </div>-->
+    <script src="/js/vendor/placeholders.min.js"></script>
+    <script src="/js/foundation/foundation.js"></script>
+    <script src="/js/foundation/foundation.dropdown.js"></script>
+    <script src="/js/foundation/foundation.topbar.js"></script>
+    <script src="/js/foundation/foundation.tab.js"></script>
+    <script src="/js/foundation/foundation.reveal.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/app.js"></script>
+    <script>
+      $(document).foundation();
+      var doc = document.documentElement;
+      doc.setAttribute('data-useragent', navigator.userAgent);
+    </script>
+  </body>
+</html>

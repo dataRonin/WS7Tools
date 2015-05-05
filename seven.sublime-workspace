@@ -1,0 +1,789 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"fill",
+				"fill_gaps_in_dt"
+			],
+			[
+				"fil",
+				"fill_gaps_in_dt"
+			],
+			[
+				"wmag_",
+				"wmag_pro_mean_day"
+			],
+			[
+				"write",
+				"write_xcsv"
+			],
+			[
+				"Va",
+				"Van_231_Table440"
+			],
+			[
+				"query_the",
+				"query_the_database_5"
+			],
+			[
+				"Bio",
+				"Biomasser2〔class〕"
+			],
+			[
+				"merge",
+				"merge_population_and_graveyard  (function)"
+			],
+			[
+				"Pl",
+				"PlotInstance  (class)"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "index.js",
+			"settings":
+			{
+				"buffer_size": 4970,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"contents": "/**\n * app.js: front-end core\n */\n\n(function ($) {\n    \n    // Create modal alert windows (using Foundation reveal)<-- creates a light box that drops down - arguement is a jquery pull\n    function modal_alert(bodytext, bodytag, headertext) {\n        var modal_body;\n        if (headertext) {\n            // if header text exists then send the header\n            $('#modal-header').empty().text(headertext);\n        }\n        if (bodytext) {\n            // if body text exists then send the body\n            modal_body = (bodytag) ? $('<' + bodytag + ' />') : $('<p />');\n            $('#modal-body').empty().append(\n                modal_body.text(bodytext)\n            );\n        }\n        $('#modal-dynamic').foundation('reveal', 'open');\n    }\n\n    // Receive messages through websocket from server\n    function socket_listeners(socket) {\n        // if the socket has data on hte left, \n        socket.on('new-cats', function (data) {\n            $('.cat-pic').each(function () {\n                $(this).show();\n            });\n            if (data && data.left){\n                var imagepath = '/images/';\n                $('#pick-left img').attr('src', imagepath+data.left);\n                $('#pick-right img').attr('src', imagepath+data.right);\n            }\n        });\n        socket.on('picked-count', function (data) {\n            var tagline, modaltext;\n            if (data && data.times_picked) {\n                if (data.side==='left') {\n                    modaltext = \"You picked cat 1!\";\n                    \n                } else {\n                    modaltext = \"You picked cat 2!\";\n                    \n                }\n                tagline = \"Just like \" + data.times_picked+ \" other people\";\n                /* displays in the drop down lightbox as header text (modal alert)*/\n                modal_alert(tagline, \"h4\", modaltext);\n            }\n        });\n    }\n\n    // Send messages through websocket to server\n    function socket_emitters(socket) {\n        $(\"#pick-left\").click(function (event) {\n            event.preventDefault();\n            /* function for getting which cat was picked and the file-name*/\n            var data = {\n                side:'left',\n                filename: $('#pick-left img').attr('src')};\n            socket.emit('picked', data);\n            /* displays in the drop down lightbox as body text (modal alert)*/    \n            \n        });\n        $(\"#pick-right\").click(function (event) {\n            event.preventDefault();\n            var data = {\n                side:'right',\n                filename: $('#pick-right img').attr('src')};\n            socket.emit('picked', data);\n        });\n        $('#previous-cat').click(function (event) {\n            event.preventDefault();\n            socket.emit('previous-cats');\n        });\n        $('#next-cat').click(function (event) {\n            event.preventDefault();\n            socket.emit('update-cats');\n        });\n    }\n\n    /* doc ready is like the main function */\n    $(document).ready(function () {\n        var socket_url, socket;\n        /* socket_listeners and socket_emitters come online to set up an environment where we can have call backs */\n        socket_url = window.location.protocol + '//' + document.domain + ':' + location.port;\n        socket = io.connect(socket_url);\n        socket.on(\"connect\", function(){\n            socket_listeners(socket);\n            socket_emitters(socket);  \n        });\n    });\n\n})(jQuery);\n",
+			"file": "public/js/app.js",
+			"file_size": 3465,
+			"file_write_time": 1429409627000000,
+			"settings":
+			{
+				"buffer_size": 3465,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/page.ejs",
+			"settings":
+			{
+				"buffer_size": 3917,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "public/css/style.css",
+			"settings":
+			{
+				"buffer_size": 1134,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "Packages/Markdown Preview/Markdown.sublime-build",
+	"command_palette":
+	{
+		"height": 347.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"",
+				"SublimeREPL: Shell"
+			],
+			[
+				"Package Control: instal",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: install package",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: insta",
+				"Package Control: Install Package"
+			],
+			[
+				"upgrade",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"package conrol",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ins",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: install",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: inta",
+				"Package Control: Install Package"
+			],
+			[
+				"LaTextools",
+				"LaTeXTools: Reconfigure and migrate settings"
+			],
+			[
+				"Package Control: remov",
+				"Package Control: Remove Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: New Article"
+			],
+			[
+				"repl",
+				"SublimeREPL: Matlab"
+			],
+			[
+				"Package Control: Inst",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: install	",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: Install Package",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 486.0
+	},
+	"console":
+	{
+		"height": 124.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/dataRonin/Documents/april2015/smash/smashWorkers.py",
+		"/Users/dataRonin/Documents/may2015/seven/app.js",
+		"/Users/dataRonin/Documents/april2015/solar/nadp_and_our_pre.py",
+		"/Users/dataRonin/Documents/april2015/solar/nadp_precip.csv",
+		"/Users/dataRonin/Documents/april2015/solar/centemp.py",
+		"/Users/dataRonin/Documents/april2015/solar/chris_tests_2.py",
+		"/Users/dataRonin/Documents/april2015/smash/form_connection.py",
+		"/Users/dataRonin/Documents/april2015/smash/smash.sublime-project",
+		"/Users/dataRonin/Documents/april2015/form_connection.py",
+		"/Users/dataRonin/Documents/april2015/solar/bounds_check.py",
+		"/Users/dataRonin/Documents/april2015/precip_for_girl.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_vanmet.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/xtempx.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/form_connection.py",
+		"/Users/dataRonin/Documents/may2015/wind/templates/highstock.ejs",
+		"/Users/dataRonin/Documents/may2015/wind/templates/page.ejs",
+		"/Users/dataRonin/Documents/may2015/wind/public/css/foundation.css.map",
+		"/Users/dataRonin/Documents/may2015/wind/public/js/app.js",
+		"/Users/dataRonin/Documents/april2015/smash/smashBosses.py",
+		"/Users/dataRonin/Documents/april2015/smash/CONFIG.yaml",
+		"/Users/dataRonin/Documents/april2015/smash/README.md",
+		"/Users/dataRonin/Documents/april2015/smash/CONFIG2.yaml",
+		"/Users/dataRonin/Documents/april2015/smash/LIMITED.yaml",
+		"/Users/dataRonin/Documents/april2015/smash/limited_yaml_bak/LIMITED.yaml",
+		"/Volumes/SHARE/Groups/HJA/phenology/Dataloggers/stream_temperature/cleaned/PC_E1_June2009_Winter13_cleaned_11-2013.csv",
+		"/Users/dataRonin/Documents/march2015/sherri/functional_tests.py",
+		"/Users/dataRonin/Documents/march2015/sherri/reference_streams/PC_E1_June2009_Winter1311-2013_reformatted.csv",
+		"/Users/dataRonin/Documents/march2015/sherri/PC_E1_June2009_Winter13.csv",
+		"/Users/dataRonin/Documents/march2015/sherri/tests/unit_tests.py",
+		"/Users/dataRonin/Documents/march2015/sherri/config.yaml",
+		"/Users/dataRonin/Documents/april2015/refstands/sarah_merge.py",
+		"/Users/dataRonin/Documents/january2015/metqc/_posts/2015-03-27-sarahs-reference-stands-temperature-merger.markdown",
+		"/Users/dataRonin/Documents/january2015/metqc/_posts/2015-03-27-rescuing-the-reference-stand-data.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/assets/jstest.js",
+		"/Users/dataRonin/Documents/january2015/metQC/assets/data.tsv",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-03-25-summary-of-minimum-and-maximum-analyses.markdown",
+		"/Users/dataRonin/Documents/march2015/airtfx2/daily_met_latestart.yaml",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-10-min_max_checks.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/_posts/2015-03-24-daily-minimums-and-maximums-can-be-found-from-five-minute-means.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-03-24-daily-minimums-and-maximums-can-be-found-from-five-minute-means.markdown",
+		"/Users/dataRonin/Documents/march2015/airtfx2/sql_primet_150.py",
+		"/Users/dataRonin/Documents/march2015/airtfx2/comphrdy.py",
+		"/Users/dataRonin/Documents/march2015/airtfx2/hourly_daily_airtemp_primet450.html",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-03-25-rescuing-old-data-from-primet-450.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/octopress",
+		"/Users/dataRonin/Documents/january2015/metQC/new",
+		"/Users/dataRonin/Documents/january2015/metQC/post",
+		"/Users/dataRonin/Documents/january2015/metQC/rescuing old data from PRIMET 450",
+		"/Users/dataRonin/codemonkey/_posts/2015-03-25-the-regex-you-must-be-wary-of.markdown",
+		"/Users/dataRonin/Documents/march2015/data1.csv",
+		"/Users/dataRonin/Documents/march2015/test1.html",
+		"/Users/dataRonin/Documents/march2015/airtfx2/functional_tests.py",
+		"/Users/dataRonin/Documents/march2015/airtfx2/workflow_vpd.py",
+		"/Users/dataRonin/Documents/march2015/airtfx2/workflow.py",
+		"/Users/dataRonin/Documents/march2015/airtfx2/workflow_dew.py",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-10-comparing-computed-metrics-from-air-temperature-and-relative-humidity.markdown",
+		"/Users/dataRonin/Documents/march2015/airtfx2/workflow_airtemp.py",
+		"/Users/dataRonin/Documents/march2015/airtfx2/climparser.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/CLIM_2014.DAT",
+		"/Users/dataRonin/Documents/march2015/airtfx2/CLIM_2015_013.DAT",
+		"/Users/dataRonin/Documents/march2015/airtfx2/CLIM_2014.DAT",
+		"/Users/dataRonin/Documents/march2015/sherri/setup.py",
+		"/Users/dataRonin/cutecat/templates/page.ejs",
+		"/Users/dataRonin/renamer.py",
+		"/Users/dataRonin/cutecat/app.json",
+		"/Users/dataRonin/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
+		"/Users/dataRonin/Documents/march2015/airtfx2/Maximum_solar_downwelling_Wm2.csv",
+		"/Users/dataRonin/hurricane/config.toml",
+		"/Users/dataRonin/codemonkey/_posts/2015-03-18-review-of-chapters-1-4-of-test-driven-development-in-python.markdown",
+		"/Users/dataRonin/codemonkey/_config.yml",
+		"/Users/dataRonin/codemonkey/_posts/2015-03-18-template-test.markdown",
+		"/Users/dataRonin/Documents/tdd/superlists/functional_tests.py",
+		"/Users/dataRonin/Documents/tdd/functional_tests.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/ms04318_primet_rebuilt.csv",
+		"/Users/dataRonin/.bash_profile",
+		"/Users/dataRonin/Documents/tdd/superlists/lists/tests.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_cs2met.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_h15met.py",
+		"/Users/dataRonin/Documents/january2015/metqc/_posts/2015-02-16-validating-dew-point-calculation-versus-portal.markdown",
+		"/Users/dataRonin/Documents/march2015/oldxtempx.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_fuplmet.py",
+		"/Users/dataRonin/Documents/march2015/mapper/schemamap.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_cenmet.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_uplmet.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver_aspirated.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/driver.py",
+		"/Users/dataRonin/Documents/march2015/airtfx/ms04312_uplmet_rebuilt_relhum.csv",
+		"/Users/dataRonin/codemonkey/_posts/2015-03-16-speedy-yamling.markdown",
+		"/Users/dataRonin/Documents/march2015/pri_conn.py",
+		"/.bashrc",
+		"/Users/dataRonin/Documents/tdd/superlists/__init__.py",
+		"/Users/dataRonin/Documents/tdd/superlists/superlists/__init__.py",
+		"/Users/dataRonin/Documents/tdd/superlists/superlists/__pycache__/settings.cpython-34.pyc",
+		"/Users/dataRonin/Documents/tdd/superlists/superlists/settings.py",
+		"/usr/local/.git/config",
+		"/Users/dataRonin/Documents/march2015/vantemp.py",
+		"/Users/dataRonin/Documents/january2015/metqc/_posts/2015-03-11-par-what-is-it-and-what-do-we-do-with-it.markdown",
+		"/Users/dataRonin/Documents/march2015/despike.py",
+		"/Users/dataRonin/Documents/march2015/notes.js",
+		"/Users/dataRonin/Documents/march2015/precip/snow.html",
+		"/Users/dataRonin/Documents/march2015/cheese3.sql",
+		"/Users/dataRonin/Documents/march2015/sqlblob.sql",
+		"/Users/dataRonin/Documents/march2015/srdown_15_5.csv",
+		"/Users/dataRonin/Documents/march2015/srdown_15_5_primet.csv",
+		"/Users/dataRonin/Documents/march2015/cheese2.sql",
+		"/Users/dataRonin/Documents/march2015/bignet2.csv",
+		"/Users/dataRonin/Documents/march2015/bignet2.cs",
+		"/Users/dataRonin/Documents/march2015/bignet.csv",
+		"/Users/dataRonin/Documents/march2015/revir.csv",
+		"/Users/dataRonin/Documents/march2015/cheese.sql",
+		"/Users/dataRonin/Documents/february2015/snopil/baseline.py",
+		"/Users/dataRonin/Documents/february2015/litecsv.py",
+		"/Users/dataRonin/Documents/february2015/rescuewind.py",
+		"/Users/dataRonin/Documents/february2015/snopil/varasno.py",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-20-notes-on-5-minute-precip-gage-flags.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-20-checks-on-air-temperature-and-wind-in-portal.markdown",
+		"/Users/dataRonin/julia/VERSION",
+		"/Users/dataRonin/Documents/february2015/netrad/litecsv.py",
+		"/Users/dataRonin/Documents/february2015/uplpre.py",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-18-cumulative-precipitation-on-uplmet.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-12-swe-and-sno.markdown",
+		"/Users/dataRonin/Documents/january2015/metQC/_posts/2015-02-12-updates-on-snow-lysimeter-and-precipitation-on-uplmet-cenmet-and-h15met.markdown",
+		"/Users/dataRonin/codemonkey/_posts/2015-02-18-looking-under-the-sql-hood.markdown",
+		"/Users/dataRonin/Documents/february2015/metdatmissing.py",
+		"/Users/dataRonin/Documents/february2015/cmdget.c",
+		"/Users/dataRonin/Documents/february2015/missing-cenmet.txt",
+		"/Users/dataRonin/Documents/february2015/code.sql",
+		"/Users/dataRonin/codemonkey/_posts/2015-02-14-code-monkey-subquery.markdown"
+	],
+	"find":
+	{
+		"height": 92.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"constrained",
+			"really_bad_bad",
+			"constrained",
+			"entity",
+			"max",
+			"bad",
+			"max_smoothed",
+			"create_profile_curve",
+			"import",
+			"max_smoothed_top",
+			"import",
+			"us: Q",
+			"yaml",
+			"generate",
+			"form",
+			"class = right",
+			"class= right",
+			"class=right",
+			"Register",
+			"od.keys",
+			"\"LYS\"",
+			"\"LYS",
+			"PAR",
+			"SOILTEMP",
+			"LTERLogger_new",
+			"new",
+			"VPD",
+			"num_total_obs_spd",
+			"print(\"the ",
+			"print(\"the nu",
+			"height",
+			"\"NA",
+			"\"None\"",
+			"%d",
+			"%s",
+			"\"None\"",
+			"AIR",
+			"WND",
+			"REL",
+			"AIR",
+			"max",
+			"wuy",
+			"wux",
+			"dir",
+			"daily_flag = 'A'",
+			"lwout",
+			"lwin",
+			"swout",
+			"swin",
+			"varmet",
+			"mean_valid_obs",
+			"min_flag",
+			"CONFIG",
+			"cfg",
+			"[288, 96",
+			"Rel",
+			"Relative",
+			"mag",
+			"mean",
+			"tot",
+			"num_not_crappy_obs",
+			"flagged_file",
+			"site_file",
+			"template",
+			"gap",
+			"walk",
+			"\"M\"",
+			"\"None",
+			"dew",
+			"rel",
+			"dew",
+			"rel",
+			"air",
+			"minimum",
+			"maximum",
+			"dewpt",
+			"max_val",
+			"od_air",
+			"[...]",
+			"drange",
+			"val2ues",
+			"val3ues",
+			"maximum",
+			"flag2",
+			"val2",
+			"nanmean",
+			"flag",
+			"val",
+			"dew",
+			"air",
+			"airtemp",
+			"'dewpt",
+			"G",
+			"-30., 50., -20., 45.",
+			"dew",
+			"Dew",
+			"DEW",
+			"dewpt",
+			"'relhum",
+			"dewpti",
+			"\"relhum",
+			"relhum",
+			"C",
+			"h15par",
+			"fill_gaps_in_dt",
+			"parse_dat",
+			"parse",
+			"REL",
+			"dew",
+			"relhum",
+			"\"relhum\"",
+			"RELPRI",
+			"val2",
+			"h15",
+			"-5., 105., -1., 101.",
+			"relhum",
+			"max",
+			"mean",
+			"150",
+			"sql",
+			"h15met",
+			"generate",
+			"relhum",
+			"airtemp",
+			"cenmet",
+			"generate_min",
+			"max",
+			"generate_min_max_flags"
+		],
+		"highlight": true,
+		"in_selection": true,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"really",
+			"really_bad",
+			"mean",
+			"min",
+			"out_of_bounds",
+			"self.od.keys",
+			"LTERLogger_pro",
+			"?",
+			"None",
+			"REL",
+			"AIR",
+			"WND",
+			"REL",
+			"wair",
+			"wuy",
+			"wux",
+			"temp",
+			"nr",
+			"lwout",
+			"lwin",
+			"swout",
+			"dir",
+			"mag",
+			"spd",
+			"num_valid_obs",
+			"\"M",
+			"vpd",
+			"dew",
+			"vpd",
+			"dew",
+			"rel",
+			"min",
+			"max",
+			"airtemp",
+			"min_val",
+			"one_dictionary",
+			"",
+			"values",
+			"minimum",
+			"flag3",
+			"val3",
+			"maximum",
+			"flag2",
+			"val2",
+			"vpd",
+			"dew",
+			"'airtemp",
+			"A",
+			"-5., 105., -1., 101.",
+			"vpd",
+			"VPD",
+			"vpd",
+			"'dewpt",
+			"\"dewpt",
+			"airtemp",
+			"G",
+			"DEW",
+			"dewpt",
+			"\"dewpt\"",
+			"AIRPRI0",
+			"val3",
+			"-35., 50., -20., 45.",
+			"airtemp",
+			"maximum",
+			"max",
+			"450",
+			"vpd",
+			"dewpt",
+			"relhum",
+			"vpd",
+			"dewpt",
+			"\"relhum",
+			"   ",
+			"CuteCat",
+			"Cute Cat",
+			"D",
+			"C",
+			"B",
+			"\"None\",\"\",\"M\"",
+			"\"\",\"A\"",
+			", ",
+			"",
+			", ",
+			"\\n* ",
+			"\",",
+			"",
+			"\"",
+			"",
+			", ",
+			"\",",
+			"\"2",
+			"^\"2",
+			"",
+			", ",
+			" ",
+			",",
+			"",
+			",",
+			", 0.",
+			"first_year",
+			"remeasurements in",
+			"self",
+			"pi",
+			",\"",
+			"\",",
+			" ",
+			"",
+			"\", \"",
+			"\", \" ",
+			", ",
+			",",
+			"\"",
+			"solar_min",
+			"intest",
+			"v",
+			"butt",
+			"UPLMET",
+			"CS2MET",
+			"\\color",
+			"&",
+			"&{\\cellcolor{yellow}0.6",
+			"&{\\cellcolor{yellow}0.7",
+			"}&{\\textcolor{blue}0",
+			"&{\\cellcolor{yellow}0.5",
+			"&{\\cellcolor{yellow}0.6",
+			"&{\\cellcolor{yellow}0.7",
+			"&",
+			"}&{\\textcolor{blue}"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 3,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "index.js",
+					"settings":
+					{
+						"buffer_size": 4970,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 26.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/js/app.js",
+					"settings":
+					{
+						"buffer_size": 3465,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "templates/page.ejs",
+					"settings":
+					{
+						"buffer_size": 3917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/css/style.css",
+					"settings":
+					{
+						"buffer_size": 1134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CSS/CSS.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 106.0
+	},
+	"output.latex_log":
+	{
+		"height": 28.0
+	},
+	"output.markdown":
+	{
+		"height": 91.0
+	},
+	"replace":
+	{
+		"height": 66.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": false,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 126.0,
+	"status_bar_visible": true
+}

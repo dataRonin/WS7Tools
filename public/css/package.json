@@ -1,0 +1,32 @@
+{
+	"name": "wind",
+	"version": "0.0.1",
+	"description": "windy",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"express": "latest",
+		"express.io": "latest",
+		"errorhandler": "latest",
+		"ejs": "latest",
+        "socket.io": "latest",
+        "longjohn": "latest",
+        "underscore": "latest",
+        "jquery": "latest",
+        "sessions": "latest",
+        "connect-flash": "latest",
+        "mssql": "latest"
+	},
+	"engines": {
+		"node": "0.10.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/tinybike/wind.git"
+	},
+	"keywords": [
+	],
+	"license": "MIT"
+}

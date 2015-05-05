@@ -1,0 +1,35 @@
+{
+	"name": "chubbychat",
+	"version": "0.0.1",
+	"description": "Chubby chat for chubby people",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js"
+	},
+	"dependencies": {
+		"express": "latest",
+		"express.io": "latest",
+		"ejs": "latest",
+        "socket.io": "latest",
+        "pg": "latest",
+        "longjohn": "latest",
+        "underscore": "latest",
+        "jquery": "latest",
+        "sessions": "latest",
+        "connect-flash": "latest",
+	},
+	"engines": {
+		"node": "0.10.x"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/masospaghetti/chubbychat.git"
+	},
+	"keywords": [
+		"chubby",
+        "chubs",
+        "people",
+        "chubbins"
+	],
+	"license": "MIT"
+}
