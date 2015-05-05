@@ -1,6 +1,7 @@
 html, body {
     /*font-family: "Lato", Helvetica, Arial, sans-serif;*/
-    font-family: 'Vollkorn', serif;
+    /*font-family: 'Vollkorn', serif;*/
+    font-family: 'Oswald', sans-serif;
 }
 .title-area{
     /* 3 line vertical centering win*/
@@ -11,7 +12,8 @@ html, body {
 .title {
     /*font-family: "Sunshiney", "Lato", Helvetica, Arial, sans-serif;*/
     /*font-family: 'Indie Flower', sans-serif;*/
-    font-family: 'Vollkorn', serif;
+    font-family: 'Oswald', sans-serif;
+    /*font-family: 'Vollkorn', serif;*/
     font-weight: bold;
     font-size: 20px;
 }
@@ -44,7 +46,8 @@ html, body {
 }
 .top-bar-section ul li a{
     /*font-family: 'Indie Flower', sans-serif;*/
-    font-family: 'Vollkorn', serif;
+    /*font-family: 'Vollkorn', serif;*/
+    font-family: 'Oswald', sans-serif;
     position: relative;
     top: 50%;
     transform: translateY(10%);
