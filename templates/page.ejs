@@ -41,10 +41,29 @@
         </ul>-->
         <!--This constructs menu buttons coming in from the right-->
         <ul class="right">
+          <li class ="divider"></li>
+          <li><a href="#" id="pick-rain">Precipitation</a></li>
+          <li><a href="#" id="pick-lys">Snow Lysimeter</a></li>
           <li class="divider"></li>
-          <li><a href="#" id="pick-wind">Wind</a></li>
+          <li class="has-dropdown">
+            <a href="#" id="wind-default">Wind</a>
+            <ul class="dropdown">
+            <li><a href="#" id ="pick-wind">PRO Means</a></li>  
+            <li><a href="#" id ="pick-snc">SNC Means</a></li>
+            <li><a href="#" id ="pick-dir">Wind Directions</a></li>
+            <li><a href="#" id ="pick-van">VANMET v. SEVEN (MAX)</a></li>
+            <li><a href="#" id ="pick-cen">CENMET v. SEVEN (MAX)</a></li>
+            </ul>
+          </li>
           <li class="divider"></li>
-          <li><a href="#" id="pick-temps">Temperature</a></li>
+          <li class="has-dropdown">
+            <a href="#" id="temp-default">Temperature</a>
+            <ul class="dropdown">
+              <li><a href="#" id="pick-temps">450m Air Temperature</a></li>
+              <li><a href="#" id="pick-asp">350m Gill v. Asp. Means</a></li>
+              <li><a href="#" id="pick-maxes">350m Gill v. Asp Maxes</a></li>
+              <li><a href="#" id="pick-vant">VANMET Gill, Asp., Sonic Wind Maxes</a></li>
+            </ul>
           <li class="divider"></li>
           <li class="has-dropdown">
             <a href="#" id="pick-rads">Net Radiation</a>
@@ -63,7 +82,7 @@
     <div class="row">
       <div class="large-12 columns">
         <div class="row">
-          <h1 class="indieflower centered">WS7 Comparisons</h1>
+          <h1 class="oswaldhead">WS7 Comparisons</h1>
         </div>
     <div class = "row">
           <div id="container" style="height: 400px; min-width: 310px"></div>
@@ -78,11 +97,13 @@
             <p>&copy; Copyright 2015, <a href="mailto:fox@tinybike.net">Fox Peterson</a></p>
           </div>
           <!--<div class="large-6 columns">
-            
+          
             
             <ul class="inline-list right">
               <li><a href="mailto:fox@tinybike.net">Contact</a></li>
             </ul>
+
+
           </div>-->
         </div>
       </div>

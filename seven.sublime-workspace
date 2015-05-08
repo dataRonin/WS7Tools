@@ -47,18 +47,15 @@
 			"file": "index.js",
 			"settings":
 			{
-				"buffer_size": 4970,
+				"buffer_size": 12909,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"contents": "/**\n * app.js: front-end core\n */\n\n(function ($) {\n    \n    // Create modal alert windows (using Foundation reveal)<-- creates a light box that drops down - arguement is a jquery pull\n    function modal_alert(bodytext, bodytag, headertext) {\n        var modal_body;\n        if (headertext) {\n            // if header text exists then send the header\n            $('#modal-header').empty().text(headertext);\n        }\n        if (bodytext) {\n            // if body text exists then send the body\n            modal_body = (bodytag) ? $('<' + bodytag + ' />') : $('<p />');\n            $('#modal-body').empty().append(\n                modal_body.text(bodytext)\n            );\n        }\n        $('#modal-dynamic').foundation('reveal', 'open');\n    }\n\n    // Receive messages through websocket from server\n    function socket_listeners(socket) {\n        // if the socket has data on hte left, \n        socket.on('new-cats', function (data) {\n            $('.cat-pic').each(function () {\n                $(this).show();\n            });\n            if (data && data.left){\n                var imagepath = '/images/';\n                $('#pick-left img').attr('src', imagepath+data.left);\n                $('#pick-right img').attr('src', imagepath+data.right);\n            }\n        });\n        socket.on('picked-count', function (data) {\n            var tagline, modaltext;\n            if (data && data.times_picked) {\n                if (data.side==='left') {\n                    modaltext = \"You picked cat 1!\";\n                    \n                } else {\n                    modaltext = \"You picked cat 2!\";\n                    \n                }\n                tagline = \"Just like \" + data.times_picked+ \" other people\";\n                /* displays in the drop down lightbox as header text (modal alert)*/\n                modal_alert(tagline, \"h4\", modaltext);\n            }\n        });\n    }\n\n    // Send messages through websocket to server\n    function socket_emitters(socket) {\n        $(\"#pick-left\").click(function (event) {\n            event.preventDefault();\n            /* function for getting which cat was picked and the file-name*/\n            var data = {\n                side:'left',\n                filename: $('#pick-left img').attr('src')};\n            socket.emit('picked', data);\n            /* displays in the drop down lightbox as body text (modal alert)*/    \n            \n        });\n        $(\"#pick-right\").click(function (event) {\n            event.preventDefault();\n            var data = {\n                side:'right',\n                filename: $('#pick-right img').attr('src')};\n            socket.emit('picked', data);\n        });\n        $('#previous-cat').click(function (event) {\n            event.preventDefault();\n            socket.emit('previous-cats');\n        });\n        $('#next-cat').click(function (event) {\n            event.preventDefault();\n            socket.emit('update-cats');\n        });\n    }\n\n    /* doc ready is like the main function */\n    $(document).ready(function () {\n        var socket_url, socket;\n        /* socket_listeners and socket_emitters come online to set up an environment where we can have call backs */\n        socket_url = window.location.protocol + '//' + document.domain + ':' + location.port;\n        socket = io.connect(socket_url);\n        socket.on(\"connect\", function(){\n            socket_listeners(socket);\n            socket_emitters(socket);  \n        });\n    });\n\n})(jQuery);\n",
 			"file": "public/js/app.js",
-			"file_size": 3465,
-			"file_write_time": 1429409627000000,
 			"settings":
 			{
-				"buffer_size": 3465,
+				"buffer_size": 11327,
 				"line_ending": "Unix"
 			}
 		},
@@ -66,7 +63,7 @@
 			"file": "templates/page.ejs",
 			"settings":
 			{
-				"buffer_size": 3917,
+				"buffer_size": 4508,
 				"line_ending": "Unix"
 			}
 		},
@@ -74,7 +71,7 @@
 			"file": "public/css/style.css",
 			"settings":
 			{
-				"buffer_size": 1134,
+				"buffer_size": 1204,
 				"line_ending": "Unix"
 			}
 		}
@@ -179,6 +176,8 @@
 	},
 	"file_history":
 	[
+		"/Users/dataRonin/codemonkey/_posts/2015-05-05-long-time-no-post.markdown",
+		"/Users/dataRonin/Documents/may2015/wind/index.js",
 		"/Users/dataRonin/Documents/april2015/smash/smashWorkers.py",
 		"/Users/dataRonin/Documents/may2015/seven/app.js",
 		"/Users/dataRonin/Documents/april2015/solar/nadp_and_our_pre.py",
@@ -304,9 +303,7 @@
 		"/Users/dataRonin/codemonkey/_posts/2015-02-18-looking-under-the-sql-hood.markdown",
 		"/Users/dataRonin/Documents/february2015/metdatmissing.py",
 		"/Users/dataRonin/Documents/february2015/cmdget.c",
-		"/Users/dataRonin/Documents/february2015/missing-cenmet.txt",
-		"/Users/dataRonin/Documents/february2015/code.sql",
-		"/Users/dataRonin/codemonkey/_posts/2015-02-14-code-monkey-subquery.markdown"
+		"/Users/dataRonin/Documents/february2015/missing-cenmet.txt"
 	],
 	"find":
 	{
@@ -455,7 +452,7 @@
 			"generate_min_max_flags"
 		],
 		"highlight": true,
-		"in_selection": true,
+		"in_selection": false,
 		"preserve_case": false,
 		"regex": false,
 		"replace_history":
@@ -598,7 +595,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -606,25 +603,26 @@
 					"file": "index.js",
 					"settings":
 					{
-						"buffer_size": 4970,
+						"buffer_size": 12909,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								11050,
+								11050
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 4,
-							"translate_tabs_to_spaces": true
+							"translate_tabs_to_spaces": true,
+							"word_wrap": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 26.0,
+						"translation.y": 4656.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -634,15 +632,15 @@
 					"file": "public/js/app.js",
 					"settings":
 					{
-						"buffer_size": 3465,
+						"buffer_size": 11327,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1028,
+								1028
 							]
 						],
 						"settings":
@@ -652,7 +650,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 843.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -662,15 +660,15 @@
 					"file": "templates/page.ejs",
 					"settings":
 					{
-						"buffer_size": 3917,
+						"buffer_size": 4508,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								534,
+								534
 							]
 						],
 						"settings":
@@ -680,7 +678,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 129.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -690,15 +688,15 @@
 					"file": "public/css/style.css",
 					"settings":
 					{
-						"buffer_size": 1134,
+						"buffer_size": 1204,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1075,
+								1075
 							]
 						],
 						"settings":
@@ -708,7 +706,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 323.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

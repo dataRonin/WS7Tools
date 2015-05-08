@@ -17,6 +17,11 @@ html, body {
     font-weight: bold;
     font-size: 20px;
 }
+
+.oswaldhead {
+    font-family: 'Oswald', sans-serif;
+    text-align: center;
+}
 .vertical-spacer-25 {
     clear: both;
     width: 100%;

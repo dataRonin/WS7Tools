@@ -23,7 +23,7 @@
                         yAxis: {
                             labels: {
                                 formatter: function () {
-                                    return (this.value > 0 ? ' + ' : '') + this.value + '%';
+                                    return (this.value > 0 ? ' + ' : '') + this.value;
                                 }
                             },
                             plotLines: [{
@@ -64,62 +64,62 @@
             }
         });
 
-        socket.on('plot-rad', function (data) {
-            if (data) {
-                // was testing to see what it got console.log(data.WindSpeed);
-                var seriesCounter = 0;
-                var seriesOptions = [];
-                var names = ["SW_in_Avg", "SW_in_Max","SW_out_Avg","SW_out_Max"];
-                var drawChart = function () {
-                    $('#container').highcharts('StockChart', {
-                        rangeSelector: {
-                            selected: 2
-                        },
+        // socket.on('plot-rad', function (data) {
+        //     if (data) {
+        //         // was testing to see what it got console.log(data.WindSpeed);
+        //         var seriesCounter = 0;
+        //         var seriesOptions = [];
+        //         var names = ["SW_in_Avg", "SW_in_Max","SW_out_Avg","SW_out_Max"];
+        //         var drawChart = function () {
+        //             $('#container').highcharts('StockChart', {
+        //                 rangeSelector: {
+        //                     selected: 2
+        //                 },
 
-                        yAxis: {
-                            labels: {
-                                formatter: function () {
-                                    return (this.value > 0 ? ' + ' : '') + this.value;
-                                }
-                            },
-                            plotLines: [{
-                                value: 0,
-                                width: 2,
-                                color: 'silver'
-                            }]
-                        },
+        //                 yAxis: {
+        //                     labels: {
+        //                         formatter: function () {
+        //                             return (this.value > 0 ? ' + ' : '') + this.value;
+        //                         }
+        //                     },
+        //                     plotLines: [{
+        //                         value: 0,
+        //                         width: 2,
+        //                         color: 'silver'
+        //                     }]
+        //                 },
 
 
-                        plotOptions: {
-                            series: {
-                                compare: 'percent'
-                            }
-                        },
+        //                 plotOptions: {
+        //                     series: {
+        //                         compare: 'percent'
+        //                     }
+        //                 },
 
-                        tooltip: {
-                            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
-                            valueDecimals: 2
-                        },
+        //                 tooltip: {
+        //                     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+        //                     valueDecimals: 2
+        //                 },
 
-                        series: seriesOptions
-                    });
-                };
-                $.each(names, function (i, name) {
-                    var plotdata = [];
-                    for (var j = 0, len=data[name].length; j < len; ++j) {
-                        plotdata.push([data.TmStamp[j], data[name][j]]);
-                    }
-                    seriesOptions[i] = {
-                        name: name,
-                        data: plotdata
-                    };
-                    seriesCounter++;
-                    if (seriesCounter === names.length) {
-                        drawChart();
-                    }
-                });
-            }
-        });
+        //                 series: seriesOptions
+        //             });
+        //         };
+        //         $.each(names, function (i, name) {
+        //             var plotdata = [];
+        //             for (var j = 0, len=data[name].length; j < len; ++j) {
+        //                 plotdata.push([data.TmStamp[j], data[name][j]]);
+        //             }
+        //             seriesOptions[i] = {
+        //                 name: name,
+        //                 data: plotdata
+        //             };
+        //             seriesCounter++;
+        //             if (seriesCounter === names.length) {
+        //                 drawChart();
+        //             }
+        //         });
+        //     }
+        // });
 
         socket.on('plot-temps', function (data) {
             if (data) {
@@ -277,6 +277,51 @@
         $("#pick-cross").click(function (event) {
             event.preventDefault();
             socket.emit('cross');
+        });
+
+        $("#pick-vant").click(function (event) {
+            event.preventDefault();
+            socket.emit('vanair');
+        });
+
+        $("#pick-maxes").click(function (event) {
+            event.preventDefault();
+            socket.emit('maxair');
+        });
+
+        $("#pick-asp").click(function (event) {
+            event.preventDefault();
+            socket.emit('airasp');
+        });
+
+        $("#pick-cen").click(function (event) {
+            event.preventDefault();
+            socket.emit('cenwindmax');
+        });
+
+        $("#pick-van").click(function (event) {
+            event.preventDefault();
+            socket.emit('vanwindmax');
+        });
+
+        $("#pick-dir").click(function (event) {
+            event.preventDefault();
+            socket.emit('dir');
+        });
+
+        $("#pick-snc").click(function (event) {
+            event.preventDefault();
+            socket.emit('snc_means');
+        });
+
+        $("#pick-lys").click(function (event) {
+            event.preventDefault();
+            socket.emit('lys');
+        });
+
+        $("#pick-rain").click(function (event) {
+            event.preventDefault();
+            socket.emit('rain');
         });
     }
 
