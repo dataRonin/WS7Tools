@@ -412,22 +412,22 @@ app.io.route('dir', function (req) {
                         TmStamp.push(result.rows[i].tmstamp.getTime());
                         if (result.rows[i].vanmet < 180){
                             VANMET.push(Math.round(result.rows[i].vanmet*100)/100);
-                        } else { VANMET.push(Math.round(result.rows[i].vanmet*100)/100 -360); 
+                        } else {VANMET.push(360-Math.round(result.rows[i].vanmet*100)/100); 
                         };
                         if (result.rows[i].cenmet < 180){
                             PRIMET.push(Math.round(result.rows[i].cenmet*100)/100);
                         } else {
-                           PRIMET.push(Math.round(result.rows[i].cenmet*100)/100 - 360); 
+                           PRIMET.push(360-Math.round(result.rows[i].cenmet*100)/100); 
                         };
                         if (result.rows[i].ws7 < 180){
                             WS7.push(Math.round(result.rows[i].ws7*100)/100);  
                         } else {
-                            WS7.push(Math.round(result.rows[i].ws7*100)/100 - 360);
+                            WS7.push(360-Math.round(result.rows[i].ws7*100)/100);
                         };
                         if (result.rows[i].h15met < 180){
                             H15MET.push(Math.round(result.rows[i].h15met*100)/100);
                         } else {
-                            H15MET.push(Math.round(result.rows[i].h15met*100)/100 - 360);
+                            H15MET.push(360-Math.round(result.rows[i].h15met*100)/100);
                         }
                 }
                 req.io.emit('plot-data', {
